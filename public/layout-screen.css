@@ -1,3 +1,5 @@
+@media screen { /* To prevent PocketPC from loading the stylesheet */
+
 
 /* Page head styles */
 #pagehead {
@@ -188,7 +190,7 @@ th.light {
 	list-style: none;
 	list-style-image: none; /* bug in IE */
 	padding-left: 5px;
-	margin:0px 0px 0px 10px;          /* T   R   B   L */
+	margin:0px 0px 0px 10px;
 }
 
 #globalnav li {
@@ -251,7 +253,7 @@ th.light {
 	font-weight: bold;
 	text-decoration: none;
 	color: #ffffff;
-	padding: 2px 10px 2px 9px;   /* T   R   B   L */
+	padding: 2px 10px 2px 9px;
 	width: .1em;
 }
 
@@ -505,3 +507,4 @@ select.small {
 	text-decoration: none;
 }
 
+} /* screen media */
