@@ -3,7 +3,7 @@
  <div id="identification">
   <a href="/"><img src="images/logo.png" alt="Logo" id="logo" border="0" /></a>
   <div class="sitetitle">Help Admin Tool (HAT)</div>
-  <div class="sitetagline">Prototype v1.0</div>
+  <div class="sitetagline">Administration of help texts of other sites</div>
  </div>
 <div class="breadcrumbtrail">
  <div class="breadcrumbhead">You are here:</div>
