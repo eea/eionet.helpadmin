@@ -19,7 +19,7 @@ Hashtable appsHash = (Hashtable)session.getAttribute(Attrs.APPS);
 			if (appName!=null && appName.length>0){
 				url = url + "?app=" + appName;
 			}
-			window.open(url,"login","height=200,width=360,status=no,toolbar=no,scrollbars=no,resizable=no,menubar=no,location=no");
+			window.open(url,"login","height=200,width=430,status=no,toolbar=no,scrollbars=no,resizable=no,menubar=no,location=no");
 		}
 		
 		function logout(){
