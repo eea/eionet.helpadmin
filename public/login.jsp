@@ -8,7 +8,10 @@ String appName = request.getParameter(Params.APP_NAME);
 <html>
 <head>
 <title>User Authentication</title>
-<link href="eionet.css" rel="stylesheet" type="text/css"/>
+    <link rel="stylesheet" type="text/css" href="layout-print.css" media="print" />
+    <link rel="stylesheet" type="text/css" href="layout-handheld.css" media="handheld" />
+    <link rel="stylesheet" type="text/css" href="layout-screen.css" media="screen" title="EIONET style" />
+
 <script type="text/javascript">
 
 	function setFocus(){
@@ -65,21 +68,11 @@ String appName = request.getParameter(Params.APP_NAME);
 	
 	<tr>
 		<th align="right">Username:</th>
-		<script language="JavaScript">
-			if (navigator.appName.substring(0,5) == "Netsc")
-				document.write("<th align='left' style='padding-left:10'><input size='14' type='text' class='smalltext' name='<%=Params.APP_USR%>'/></th>");
-			else
-				document.write("<th align='left' style='padding-left:10'><input size='25' type='text' class='smalltext' name='<%=Params.APP_USR%>'/></th>");
-		</script>
+                <th align='left' style='padding-left:10'><input size='25' type='text' class='smalltext' name='<%=Params.APP_USR%>'/></th>
 	</tr>
 	<tr>
 		<th align="right">Password:</th>
-		<script language="JavaScript">
-			if (navigator.appName.substring(0,5) == "Netsc")
-				document.write("<th align='left' style='padding-left:10'><input size='14' type='password' class='smalltext' name='<%=Params.APP_PSW%>' onkeydown='javascript:keyDown()'/></th>");
-			else
-				document.write("<th align='left' style='padding-left:10'><input size='25' type='password' class='smalltext' name='<%=Params.APP_PSW%>' onkeydown='javascript:keyDown()'/></th>");
-		</script>
+                <th align='left' style='padding-left:10'><input size='25' type='password' class='smalltext' name='<%=Params.APP_PSW%>' onkeydown='javascript:keyDown()'/></th>
 	</tr>
 	<tr height="10"><td colspan="2"></td></tr>
 	<tr><td align="right" colspan="2">

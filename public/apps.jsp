@@ -8,7 +8,7 @@ Hashtable appsHash = (Hashtable)session.getAttribute(Attrs.APPS);
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <title>Help Admin Tool: Applications</title>
-    <meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type">
+    <meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"/>
     <link rel="stylesheet" type="text/css" href="layout-print.css" media="print" />
     <link rel="stylesheet" type="text/css" href="layout-handheld.css" media="handheld" />
     <link rel="stylesheet" type="text/css" href="layout-screen.css" media="screen" title="EIONET style" />
@@ -19,7 +19,7 @@ Hashtable appsHash = (Hashtable)session.getAttribute(Attrs.APPS);
 			if (appName!=null && appName.length>0){
 				url = url + "?app=" + appName;
 			}
-			window.open(url,"login","height=200,width=300,status=no,toolbar=no,scrollbars=no,resizable=no,menubar=no,location=no");
+			window.open(url,"login","height=200,width=360,status=no,toolbar=no,scrollbars=no,resizable=no,menubar=no,location=no");
 		}
 		
 		function logout(){
