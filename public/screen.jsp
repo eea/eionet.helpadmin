@@ -1,14 +1,14 @@
-<%@page contentType="text/html" import="java.util.*,eionet.helpadm.*,com.tee.uit.help.*"%>
+<%@page contentType="text/html;charset=UTF-8" import="java.util.*,eionet.helpadm.*,com.tee.uit.help.*"%>
 
 <%
-
+request.setCharacterEncoding("UTF-8");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <title>Help Admin Tool</title>
-    <meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type" />
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
     <link rel="stylesheet" type="text/css" href="layout-print.css" media="print" />
     <link rel="stylesheet" type="text/css" href="layout-handheld.css" media="handheld" />
     <link rel="stylesheet" type="text/css" href="layout-screen.css" media="screen" title="EIONET style" />
@@ -22,7 +22,7 @@
     <%@ include file="operations.jsp" %>
     <h1>Screen</h1>
 
-					<form name="screen" method="post" action="main">
+					<form name="screen" method="post" action="main" acceptcharset="UTF-8">
 					<table width="600" cellspacing="0" cellpadding="3">
 					
 						<tr>

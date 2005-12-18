@@ -1,6 +1,9 @@
 package eionet.helpadm;
 
 import java.util.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.net.*;
 
 import javax.servlet.http.*;
@@ -88,7 +91,8 @@ public class Application {
 		if (client==null) loadClient();
 		
 		Vector params = new Vector();
-		req.setAttribute(Attrs.SCREENS, client.getValue("getScreens", params));
+		Object o = client.getValue("getScreens", params);
+		req.setAttribute(Attrs.SCREENS, o);
 	}
 
 	/**
@@ -249,12 +253,16 @@ public class Application {
 		
 		String screenID = req.getParameter(Params.SCREEN_ID);
 		if (Util.nullString(screenID)) throwMissingParam(Params.SCREEN_ID);
+		
 		String areaID = req.getParameter(Params.AREA_ID);
-		if (Util.nullString(areaID)) throwMissingParam(Params.AREA_ID);		
+		if (Util.nullString(areaID)) throwMissingParam(Params.AREA_ID);
+				
 		String htmlText = req.getParameter(Params.HTML_TEXT);
 		if (htmlText==null) htmlText = "";
+		
 		String popupWidth = req.getParameter(Params.POPUP_WIDTH);
 		if (popupWidth==null) popupWidth = "";
+		
 		String popupLength = req.getParameter(Params.POPUP_LENGTH);
 		if (popupLength==null) popupLength = "";
 		

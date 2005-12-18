@@ -23,15 +23,19 @@ public class Main extends Base {
 	public void service(HttpServletRequest req, HttpServletResponse res)
 										throws ServletException, IOException {  
 
+		req.setCharacterEncoding("UTF-8");
+		
 		String action = req.getParameter(Params.ACTION);
 		if (Util.nullString(action)) action = Actions.DEFAULT;
 		
 		try{
 			//guard(req, action);
 			act(req, action);
+			
 		}
-		catch (Exception e){
-			handleError(action, req, res, e);
+		catch (Throwable t){
+			t.printStackTrace();
+			handleError(action, req, res, t);
 			return;
 		}
 		

@@ -1,6 +1,9 @@
-<%@page contentType="text/html" import="java.util.*,eionet.helpadm.*,com.tee.uit.security.*"%>
+<%@page contentType="text/html;charset=UTF-8" import="java.util.*,eionet.helpadm.*,com.tee.uit.security.*"%>
 
 <%
+
+request.setCharacterEncoding("UTF-8");
+
 Hashtable appsHash = (Hashtable)session.getAttribute(Attrs.APPS);
 %>
 
@@ -8,7 +11,7 @@ Hashtable appsHash = (Hashtable)session.getAttribute(Attrs.APPS);
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <title>Help Admin Tool: Applications</title>
-    <meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type"/>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
     <link rel="stylesheet" type="text/css" href="layout-print.css" media="print" />
     <link rel="stylesheet" type="text/css" href="layout-handheld.css" media="handheld" />
     <link rel="stylesheet" type="text/css" href="layout-screen.css" media="screen" title="EIONET style" />

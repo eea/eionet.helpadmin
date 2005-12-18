@@ -112,14 +112,14 @@ public abstract class Base extends HttpServlet {
 	 * Handles the given exception by redirecting to the correct page
 	 */
 	protected void handleError(String action, HttpServletRequest req, HttpServletResponse res,
-							   Exception e) throws ServletException,IOException {
+							   Throwable t) throws ServletException,IOException {
 		
 		// if signon exception, remove application from session, so the user is not
 		// directed to screens list again (getting the exception again and infinitely)
-		if (e.toString().indexOf("com.tee.uit.security.SignOnException") != -1 )			
+		if (t.toString().indexOf("com.tee.uit.security.SignOnException") != -1 )			
 			req.getSession().removeAttribute(Attrs.APP);
 		
-		handleError(action, req, res, e.toString());
+		handleError(action, req, res, t.toString());
 	}
 
 	/**

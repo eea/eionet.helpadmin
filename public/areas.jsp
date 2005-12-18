@@ -1,6 +1,9 @@
-<%@page contentType="text/html" import="java.util.*,eionet.helpadm.*,eionet.helpadm.util.*,com.tee.uit.help.*"%>
+<%@page contentType="text/html;charset=UTF-8" import="java.util.*,eionet.helpadm.*,eionet.helpadm.util.*,com.tee.uit.help.*"%>
 
 <%
+
+request.setCharacterEncoding("UTF-8");
+
 Vector areas = (Vector)request.getAttribute(Attrs.AREAS);
 String screenID = request.getParameter(Params.SCREEN_ID);
 
@@ -12,7 +15,7 @@ if (areas!=null)
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <title>Help Admin Tool</title>
-    <meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type" />
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
     <link rel="stylesheet" type="text/css" href="layout-print.css" media="print" />
     <link rel="stylesheet" type="text/css" href="layout-handheld.css" media="handheld" />
     <link rel="stylesheet" type="text/css" href="layout-screen.css" media="screen" title="EIONET style" />

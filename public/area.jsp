@@ -1,6 +1,9 @@
-<%@page contentType="text/html" import="java.util.*,eionet.helpadm.*,com.tee.uit.help.*"%>
+<%@page contentType="text/html;charset=UTF-8" import="java.util.*,eionet.helpadm.*,com.tee.uit.help.*"%>
 
 <%
+
+request.setCharacterEncoding("UTF-8");
+
 String screenID = request.getParameter(Params.SCREEN_ID);
 if (screenID==null){
 	request.setAttribute(Attrs.ERRMSG, "Parameter Params.SCREEN_ID is missing!");
@@ -12,7 +15,7 @@ if (screenID==null){
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <title>Help Admin Tool</title>
-    <meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type" />
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
     <link rel="stylesheet" type="text/css" href="layout-print.css" media="print" />
     <link rel="stylesheet" type="text/css" href="layout-handheld.css" media="handheld" />
     <link rel="stylesheet" type="text/css" href="layout-screen.css" media="screen" title="EIONET style" />

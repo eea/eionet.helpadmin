@@ -1,6 +1,9 @@
-<%@page contentType="text/html" import="eionet.helpadm.*"%>
+<%@page contentType="text/html;charset=UTF-8" import="eionet.helpadm.*"%>
 
 <%
+
+request.setCharacterEncoding("UTF-8");
+
 String errMsg = (String)request.getAttribute(Attrs.ERRMSG);
 if (errMsg==null) errMsg = (String)session.getAttribute(Attrs.ERRMSG);
 if (errMsg==null) errMsg = "Was error, but found no error message!";
@@ -10,7 +13,7 @@ if (errMsg==null) errMsg = "Was error, but found no error message!";
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <title>Help Admin Tool</title>
-    <meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type" />
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
     <link rel="stylesheet" type="text/css" href="layout-print.css" media="print" />
     <link rel="stylesheet" type="text/css" href="layout-handheld.css" media="handheld" />
     <link rel="stylesheet" type="text/css" href="layout-screen.css" media="screen" title="EIONET style" />
