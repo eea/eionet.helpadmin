@@ -17,7 +17,7 @@
 		../public/WEB-INF/lib/uit-help.jar;
 		../public/WEB-INF/lib/uit-definition.jar;
 		../public/WEB-INF/lib/uit-server.jar;
-		../public/WEB-INF/lib/xmlrpc.jar;
+		../public/WEB-INF/lib/xmlrpc-2.0.jar;
 		../public/WEB-INF/lib/xmlserver.jar;
 		/var/lib/tomcat4/common/lib/[servletapi4].jar"/>
   </target>
