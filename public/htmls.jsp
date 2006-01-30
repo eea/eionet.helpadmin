@@ -1,4 +1,4 @@
-<%@page contentType="text/html;charset=UTF-8" import="java.util.*,eionet.helpadm.*,com.tee.uit.help.*"%>
+<%@page contentType="text/html;charset=UTF-8" import="java.util.*,eionet.helpadm.*,com.tee.uit.help.*,eionet.helpadm.util.*"%>
 
 <%
 
@@ -69,7 +69,10 @@ if (popupLength==null) popupLength = "";
 							<tr><td colspan="2">HTML text:</td></tr>
 							<tr>
 								<td colspan="2">
-									<textarea cols="80" rows="20" name="<%=Params.HTML_TEXT%>"><%=htmlText%></textarea>
+									<%
+									String doubleEscapedHtmlText = eionet.helpadm.util.Util.escapeEscapedHTML(htmlText);
+									%>
+									<textarea cols="80" rows="20" name="<%=Params.HTML_TEXT%>"><%=doubleEscapedHtmlText%></textarea>
 								</td>
 							</tr>
 						</table>
