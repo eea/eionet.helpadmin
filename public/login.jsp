@@ -7,10 +7,8 @@ String appName = request.getParameter(Params.APP_NAME);
 
 <html>
 <head>
-<title>User Authentication</title>
-    <link rel="stylesheet" type="text/css" href="layout-print.css" media="print" />
-    <link rel="stylesheet" type="text/css" href="layout-handheld.css" media="handheld" />
-    <link rel="stylesheet" type="text/css" href="layout-screen.css" media="screen" title="EIONET style" />
+    <%@ include file="headerinfo.txt" %>
+    <title>User Authentication</title>
 
 <script type="text/javascript">
 
