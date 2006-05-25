@@ -140,10 +140,11 @@ public abstract class Base extends HttpServlet {
 	protected void closeAppLogin(HttpServletResponse res, String redirUrl) throws IOException{
 		
 		StringBuffer buf = new StringBuffer().
-		append("<html><script>window.opener.location = '").
+		append("<html><script type=\"text/javascript\">window.opener.location = '").
 		append(redirUrl).append("'; ").append("window.close()</script></html>");
 		
 		try{
+			res.setContentType("text/html");
 			PrintWriter out = res.getWriter();
 			out.print(buf.toString());
 			out.close();
