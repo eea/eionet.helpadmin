@@ -48,7 +48,7 @@ Hashtable appsHash = (Hashtable)session.getAttribute(Attrs.APPS);
 					<b>No applications found!</b><%
 				}
 				else{ %>
-					<table width="600" cellspacing="0" cellpadding="3">
+					<table width="600" class="datatable">
 					
 						<%
 						Application sessionApp = (Application)session.getAttribute(Attrs.APP);
@@ -74,8 +74,8 @@ Hashtable appsHash = (Hashtable)session.getAttribute(Attrs.APPS);
 								href = "javascript:gotoScreens()";
 							%>
 							<tr>
-								<td class="head0"><a href="<%=href%>"><%=app.getName()%></a></td>
-								<td class="head0"><%=app.getHost()%></td>
+								<td><a href="<%=href%>"><%=app.getName()%></a></td>
+								<td><%=app.getHost()%></td>
 							</tr>
 							<%
 						}
