@@ -7,7 +7,7 @@ request.setCharacterEncoding("UTF-8");
 Hashtable appsHash = (Hashtable)session.getAttribute(Attrs.APPS);
 %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
     <%@ include file="headerinfo.txt" %>
@@ -34,14 +34,15 @@ Hashtable appsHash = (Hashtable)session.getAttribute(Attrs.APPS);
     </script>
 </head>
 <body>
-    <jsp:include page="location.jsp" flush='true'>
+<div id="container">
+    <jsp:include page="location.jsp" flush="true">
         <jsp:param name="name" value="Applications"/>
     </jsp:include>
     <%@ include file="menu.jsp" %>
 <div id="workarea">
     <%@ include file="operations.jsp" %>
     <h1>Applications</h1>
-                                <form name="apps" action="main" method="post">
+                                <form id="apps" action="main" method="post">
 				<%
 				
 				if (appsHash==null || appsHash.size()==0){ %>
@@ -62,8 +63,8 @@ Hashtable appsHash = (Hashtable)session.getAttribute(Attrs.APPS);
 						%>
 					
 						<tr>
-							<th width="100" align="left">Application</th>
-							<th width="500" align="left">Host</th>
+							<th style="width:100" align="left">Application</th>
+							<th style="width:500" align="left">Host</th>
 						</tr>
 						
 						<%
@@ -85,10 +86,12 @@ Hashtable appsHash = (Hashtable)session.getAttribute(Attrs.APPS);
 				}
 				
 				%>
-				
-				<input type="hidden" name="<%=Params.ACTION%>" value="<%=Actions.LIST_SCREENS%>"/>
+					<fieldset style="display:none">
+						<input type="hidden" name="<%=Params.ACTION%>" value="<%=Actions.LIST_SCREENS%>"/>
+					</fieldset>
 				</form>
-				</div>
+				</div> <!-- workarea -->
+				</div> <!-- container -->
 <%@ include file="footer.jsp" %>
 </body>
 </html>

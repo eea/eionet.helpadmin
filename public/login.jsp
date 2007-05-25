@@ -1,84 +1,56 @@
 <%@ page import="eionet.helpadm.*"%>
 
 <%
-
 String appName = request.getParameter(Params.APP_NAME);
 %>
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
 <head>
     <%@ include file="headerinfo.txt" %>
     <title>User Authentication</title>
-
-<script type="text/javascript">
-
-	function setFocus(){
-		
-		if (document.all){
-			document.all('<%=Params.APP_USR%>').focus();	
-		}
-		else{
-			document.forms["LOGIN"].elements["<%=Params.APP_USR%>"].focus();
-		}
-	}
-
-	function resetForm(){
-		if (document.all){
-			document.all('LOGIN').reset();
-		}
-		else{
-			document.forms["LOGIN"].reset();
-		}
-	}
-
-	function submitForm(){
-		if (document.all){
-			document.all('LOGIN').submit();
-		}
-		else{
-			document.forms["LOGIN"].submit();
-		}
-	}
-
-	function keyDown(){
-		if (event.keyCode == 13){
-			submitForm();
-		}
-	}
-	
-</script>
 </head>
 
-<body class="popup" onload="setFocus()">
+<body class="popup" onload="document.forms['LOGIN'].elements['<%=Params.APP_USR%>'].focus();">
 
-<form name="LOGIN" method="post" action="main">
-
-<input type="hidden" name="<%=Params.ACTION%>" value="<%=Actions.APPLOGIN%>"/>
-<input type="hidden" name="<%=Params.APP_NAME%>" value="<%=appName%>"/>
-
-<table width="100%" cellspacing="0" cellpadding="0">
-
-	<tr>
-		<td colspan="2">Log into <b><%=appName%></b>:</td>
-	</tr>
+<form id="LOGIN" method="post" action="main">
+	<fieldset style="display:none">
+		<input type="hidden" name="<%=Params.ACTION%>" value="<%=Actions.APPLOGIN%>"/>
+		<input type="hidden" name="<%=Params.APP_NAME%>" value="<%=appName%>"/>
+	</fieldset>
+		
+	<table width="100%" cellspacing="0" cellpadding="1">
 	
-	<tr height="5"><td colspan="2"></td></tr>
-	
-	<tr>
-		<th align="right">Username:</th>
-                <th align='left' style='padding-left:10'><input size='25' type='text' class='smalltext' name='<%=Params.APP_USR%>'/></th>
-	</tr>
-	<tr>
-		<th align="right">Password:</th>
-                <th align='left' style='padding-left:10'><input size='25' type='password' class='smalltext' name='<%=Params.APP_PSW%>' onkeydown='javascript:keyDown()'/></th>
-	</tr>
-	<tr height="10"><td colspan="2"></td></tr>
-	<tr><td align="right" colspan="2">
-		<input name="SUBMIT" type="button" class="mediumbuttonb" value="Login" onclick="submitForm()" onkeypress="submitForm()"></input></td>
-	</tr>
-	<tr height="5"><td colspan="2"></td></tr>
-	<tr><td align="right" colspan="2"><input name="RESET" type="button" class="mediumbuttonb" value="Clear Fields" onclick="resetForm()"></input></td></tr>
-</table>
+		<tr>
+			<td>&nbsp;</td>
+			<td>Log into <strong><%=appName%></strong>:</td>
+		</tr>		
+		<tr>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+			<td align="right"><strong>Username:</strong>&nbsp;</td>
+	        <td>
+	        	<input size="25" type="text" class="smalltext" name="<%=Params.APP_USR%>"/>
+	        </td>
+		</tr>
+		<tr>
+			<td align="right"><strong>Password:</strong>&nbsp;</td>
+	        <td>
+	        	<input size="25" type="password" class="smalltext" name="<%=Params.APP_PSW%>" onkeydown="if (event.keyCode==13){document.forms['LOGIN'].submit();}"/>
+	        </td>
+		</tr>
+		<tr>
+			<td colspan="2">&nbsp;</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+			<td>
+				<input type="submit" class="mediumbuttonb" value="Login" onkeypress="document.forms['LOGIN'].submit();"/>&nbsp;<input type="reset" class="mediumbuttonb" value="Clear fields" />
+			</td>
+		</tr>
+		
+	</table>
 </form>
 </body>
 </html>
