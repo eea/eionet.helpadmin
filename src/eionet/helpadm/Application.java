@@ -7,6 +7,7 @@ import java.io.OutputStreamWriter;
 import java.net.*;
 
 import javax.servlet.http.*;
+
 import com.tee.uit.client.*;
 import com.tee.util.Util;
 
@@ -324,5 +325,41 @@ public class Application {
 	 */
 	private void throwMissingParam(String paramName) throws Exception{
 		throw new Exception("Paramater " + paramName + " is missing!");
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public Boolean isUserSuperuser(){
+		
+		if (usr!=null){
+			String superusers = Props.getProperty(Props.SUPERUSERS);
+			if (!com.tee.util.Util.nullString(superusers)){
+				StringTokenizer st = new StringTokenizer(superusers, ",");
+				while (st.hasMoreTokens()){
+					if (st.nextToken().trim().equals(usr))
+						return new Boolean(true);
+				}
+			}
+			else
+				return null;
+		}
+		
+		return new Boolean(false);
+	}
+	
+	/**
+	 * 
+	 * @param session
+	 * @return
+	 */
+	public static Boolean isUserSuperuser(HttpSession session){
+		
+		Application currentApp = (Application)session.getAttribute(Attrs.APP);
+		if (currentApp!=null)
+			return currentApp.isUserSuperuser();
+		else
+			return null;
 	}
 }

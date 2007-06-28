@@ -7,6 +7,7 @@ public class Props {
 	public static final String PROP_FILE = "helpadmin";
 	public static final String APPS = "applications";
 	public static final String ROUTER_URL = ".router.url";
+	public static final String SUPERUSERS = "superusers";
 	public static final String DBG = "dbg";
 	
 	private static ResourceBundle props = null;

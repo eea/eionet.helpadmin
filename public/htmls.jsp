@@ -24,6 +24,10 @@ if (popupWidth==null) popupWidth = "";
 String popupLength = (String)request.getParameter(Params.POPUP_LENGTH);
 if (popupLength==null) popupLength = "";
 
+Boolean isUserSuperuser = Application.isUserSuperuser(session);
+String strThemeAdvancedDisable = isUserSuperuser!=null && isUserSuperuser.booleanValue()==true ?
+									"formatselect,fontselect,fontsizeselect,styleselect,anchor,image,hr,visualaid" :
+									"formatselect,fontselect,fontsizeselect,styleselect,anchor,image,cleanup,code,hr,visualaid";
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -31,8 +35,17 @@ if (popupLength==null) popupLength = "";
 <head>
     <%@ include file="headerinfo.txt" %>
     <title>Help Admin Tool</title>
+    <script type="text/javascript" src="tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
     <script type="text/javascript">
 // <![CDATA[
+
+		tinyMCE.init({
+			mode : "exact",
+			elements : "helpTextArea1",
+			theme : "advanced",
+			theme_advanced_disable : "<%=strThemeAdvancedDisable%>"
+		});
+
     	function gotoAreas(){
 	    	document.forms["htmls"].elements["<%=Params.ACTION%>"].value = "<%=Actions.LIST_AREAS%>";
 	    	document.forms["htmls"].submit();
@@ -70,7 +83,7 @@ if (popupLength==null) popupLength = "";
 					<%
 					String doubleEscapedHtmlText = eionet.helpadm.util.Util.escapeEscapedHTML(htmlText);
 					%>
-					<textarea cols="80" rows="20" name="<%=Params.HTML_TEXT%>"><%=doubleEscapedHtmlText%></textarea>
+					<textarea id="helpTextArea1" cols="80" rows="20" name="<%=Params.HTML_TEXT%>"><%=doubleEscapedHtmlText%></textarea>
 				</td>
 			</tr>
 		</table>
