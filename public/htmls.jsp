@@ -62,7 +62,7 @@ String strThemeAdvancedDisable = isUserSuperuser!=null && isUserSuperuser.boolea
 <div id="workarea">
     <div id="operations">
     <ul>
-        <li><a href="javascript:gotoAreas()">&lt; back to areas</a></li>
+        <li><a href="javascript:gotoAreas()">&lt; Back to areas</a></li>
     </ul>
     </div>
 
@@ -70,8 +70,7 @@ String strThemeAdvancedDisable = isUserSuperuser!=null && isUserSuperuser.boolea
 
 	<form id="htmls" method="post" action="main">
 	
-		<table width="auto" cellspacing="0" cellpadding="0">
-			<tr height="10"><td colspan="2">&nbsp;</td></tr>
+		<table width="100%" cellspacing="0" cellpadding="0">
 			<tr>
 				<td>HTML text:</td>
 				<td align="center">
@@ -83,33 +82,36 @@ String strThemeAdvancedDisable = isUserSuperuser!=null && isUserSuperuser.boolea
 					<%
 					String doubleEscapedHtmlText = eionet.helpadm.util.Util.escapeEscapedHTML(htmlText);
 					%>
-					<textarea id="helpTextArea1" cols="80" rows="20" name="<%=Params.HTML_TEXT%>"><%=doubleEscapedHtmlText%></textarea>
+					<textarea id="helpTextArea1" style="width:100%" cols="80" rows="20" name="<%=Params.HTML_TEXT%>"><%=doubleEscapedHtmlText%></textarea>
 				</td>
 			</tr>
 		</table>
 		
 		<table width="650" cellspacing="0" cellpadding="0">
+		  <col style="width: 15%"/>
+		  <col style="width: 60%"/>
+		  <col style="width: 25%"/>
 			<tr>
-				<td style="width:15%">Popup width:</td>
-				<td style="width:85%" colspan="2">Popup length:</td>
+				<td>Popup width:</td>
+				<td colspan="2">Popup length:</td>
 			</tr>
 			<tr>
-				<td style="width:15%">
+				<td>
 					<input type="text" size="10" name="<%=Params.POPUP_WIDTH%>" value="<%=popupWidth%>" />
 				</td>
-				<td style="width:60%">
+				<td>
 					<input type="text" size="10" name="<%=Params.POPUP_LENGTH%>" value="<%=popupLength%>" />
 				</td>
-				<td style="width:25%" align="right">
+				<td align="right">
 				</td>
 			</tr>
 		</table>
 		
-		<fieldset style="display:none">
+		<div style="display:none">
 			<input type="hidden" name="<%=Params.ACTION%>" value="<%=Actions.EDIT_AREA%>"/>
 			<input type="hidden" name="<%=Params.SCREEN_ID%>" value="<%=screenID%>"/>
 			<input type="hidden" name="<%=Params.AREA_ID%>" value="<%=areaID%>"/>
-		</fieldset>
+		</div>
 		
 	</form>
 </div> <!-- workarea -->
