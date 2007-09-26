@@ -266,7 +266,10 @@ public class Application {
 		
 		String popupLength = req.getParameter(Params.POPUP_LENGTH);
 		if (popupLength==null) popupLength = "";
-		
+
+		String areaDescr = req.getParameter(Params.AREA_DESCR);
+		if (areaDescr==null) areaDescr = "";
+
 		if (client==null) loadClient();
 
 		Vector params = new Vector();
@@ -275,6 +278,7 @@ public class Application {
 		params.add(htmlText.trim());
 		params.add(popupWidth.trim());
 		params.add(popupLength.trim());
+		params.add(areaDescr.trim());
 		client.getValue("editArea", params);
 	}
 
