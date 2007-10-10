@@ -26,8 +26,8 @@ if (popupLength==null) popupLength = "";
 
 Boolean isUserSuperuser = Application.isUserSuperuser(session);
 String strThemeAdvancedDisable = isUserSuperuser!=null && isUserSuperuser.booleanValue()==true ?
-									"formatselect,fontselect,fontsizeselect,styleselect,anchor,image,hr,visualaid" :
-									"formatselect,fontselect,fontsizeselect,styleselect,anchor,image,cleanup,code,hr,visualaid";
+									"fontselect,fontsizeselect,styleselect,anchor,image,hr,visualaid" :
+									"fontselect,fontsizeselect,styleselect,anchor,image,cleanup,code,hr,visualaid";
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
