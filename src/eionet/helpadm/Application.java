@@ -11,7 +11,7 @@ import javax.servlet.http.*;
 import com.tee.uit.client.*;
 import com.tee.util.Util;
 
-public class Application {
+public class Application implements java.io.Serializable{
 	
 	public static final String RPC_SERVICE_NAME = "HelpService";
 	
