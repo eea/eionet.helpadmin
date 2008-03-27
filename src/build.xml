@@ -3,23 +3,71 @@
   <!-- set global properties for this build -->
   <property name="src" value="."/>
   <property name="classes" value="../public/WEB-INF/classes"/>
+  <property name="lib" value="../public/WEB-INF/lib"/>
+  <property name="test" value="../test"/>
 
+  <!-- define external classpath, i.e. JARs and classes not found in WEB-INF/classes and WEB-INF/lib -->
+  <path id="classpath.externals">
+    <pathelement location="/var/lib/tomcat5/common/lib/[servlet].jar"/>
+  </path>
+
+  <!-- define classpath for compile -->
+  <path id="classpath.compile">
+    <fileset dir="${lib}">
+      <include name="**/*.jar"/>
+    </fileset>
+    <path refid="classpath.externals"/>
+  </path>
+
+  <!-- define classpath for unit tests -->
+  <path id="classpath.compile-tests">
+    <pathelement location="${classes}"/>
+    <fileset dir="${test}/lib">
+      <include name="*.jar"/>
+    </fileset>
+    <path refid="classpath.compile"/>
+  </path>
+
+  <!-- define classpath to be used bu JUnit -->
+  <path id="classpath.test">
+    <pathelement path="${test}/build"/>
+    <pathelement path="${classes}"/>
+    <fileset dir="${lib}">
+      <include name="**/*.jar"/>
+    </fileset>
+    <path refid="classpath.compile-tests"/>
+  </path>
+
+<!-- TARGETS -->
   <target name="compile">
     <!-- Compile the java code from ${src} into ${build} -->
-    <javac srcdir="${src}" destdir="${classes}"
-		classpath="../public/WEB-INF/lib/castor.jar;
-		../public/WEB-INF/lib/eionet-dir.jar;
-		../public/WEB-INF/lib/jndi.jar;
-		../public/WEB-INF/lib/ldap.jar;
-		../public/WEB-INF/lib/providerutil.jar;
-		../public/WEB-INF/lib/uit-security.jar;
-		../public/WEB-INF/lib/uit-client.jar;
-		../public/WEB-INF/lib/uit-help.jar;
-		../public/WEB-INF/lib/uit-definition.jar;
-		../public/WEB-INF/lib/uit-server.jar;
-		../public/WEB-INF/lib/xmlrpc-2.0.jar;
-		../public/WEB-INF/lib/xmlserver.jar;
-		/var/lib/tomcat4/common/lib/[servletapi4].jar"/>
+    <javac srcdir="${src}" destdir="${classes}">
+      <classpath refid="classpath.compile"/>
+    </javac>
   </target>
-</project>
 
+  <!-- compile target for compiling unit tests, expects classes-under-test compiled, refers to pre-defined paths -->
+  <target name="compile-tests" depends="compile">
+    <javac srcdir="${test}/src" destdir="${test}/build" debug="on">
+      <classpath refid="classpath.compile-tests"/>
+    </javac>
+  </target>
+
+  <!-- define src files to be included and/or excluded when JUnit searches for test cases -->
+  <fileset id="fileset.test" dir="${test}/src">
+    <include name="**/*Test.java"/>
+  </fileset>
+
+  <!-- test target, refers to pre-defined paths and filesets -->
+  <target name="test" depends="compile-tests" description="Runs all found unit tests">
+    <junit haltonfailure="yes" failureproperty="unittestFailed" showoutput="yes" printsummary="yes">
+      <classpath refid="classpath.test"/>
+      <formatter type="brief" usefile="false"/>
+      <batchtest fork="yes">
+        <fileset refid="fileset.test"/>
+      </batchtest>
+    </junit>
+    <fail if="unittestFailed" message="One or more unit tests failed."/>
+  </target>
+
+</project>
