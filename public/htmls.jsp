@@ -75,10 +75,11 @@ String strThemeAdvancedDisable = isUserSuperuser!=null && isUserSuperuser.boolea
 	
 		<table width="100%" cellspacing="0" cellpadding="0">
 			<tr>
-				<td>HTML text:</td>
-				<td align="center">
-					<input type="submit" value="Save"/>
-				</td>
+				<td><label for="fld_descr" class="question">Title</label></td>
+				<td><input type="text" size="60" id="fld_descr" name="<%=Params.AREA_DESCR%>" value="<%=areaDescr%>"/></td>
+			</tr>
+			<tr>
+				<td colspan="2"><label class="question">HTML text</label></td>
 			</tr>
 			<tr>
 				<td colspan="2">
@@ -95,8 +96,8 @@ String strThemeAdvancedDisable = isUserSuperuser!=null && isUserSuperuser.boolea
 		  <col style="width: 60%"/>
 		  <col style="width: 25%"/>
 			<tr>
-				<td>Popup width:</td>
-				<td colspan="2">Popup length:</td>
+				<td><label class="question">Popup width</label></td>
+				<td colspan="2"><label class="question">Popup length</label></td>
 			</tr>
 			<tr>
 				<td>
@@ -108,13 +109,17 @@ String strThemeAdvancedDisable = isUserSuperuser!=null && isUserSuperuser.boolea
 				<td align="right">
 				</td>
 			</tr>
+			<tr>
+				<td colspan="3" align="center">
+					<input type="submit" value="Save"/>
+				</td>
+			</tr>
 		</table>
 		
 		<div style="display:none">
 			<input type="hidden" name="<%=Params.ACTION%>" value="<%=Actions.EDIT_AREA%>"/>
 			<input type="hidden" name="<%=Params.SCREEN_ID%>" value="<%=screenID%>"/>
 			<input type="hidden" name="<%=Params.AREA_ID%>" value="<%=areaID%>"/>
-			<input type="hidden" name="<%=Params.AREA_DESCR%>" value="<%=areaDescr%>"/>
 		</div>
 		
 	</form>
