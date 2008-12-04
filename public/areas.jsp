@@ -18,11 +18,12 @@ if (areas!=null)
     <title>Help Admin Tool</title>
     <script type="text/javascript">
 // <![CDATA[
-    	function gotoHtmls(areaID, popupWidth, popupLength){
+    	function gotoHtmls(areaID, popupWidth, popupLength, descr){
 	    	document.forms["areas"].elements["<%=Params.SCREEN_ID%>"].value = "<%=screenID%>";
 	    	document.forms["areas"].elements["<%=Params.AREA_ID%>"].value = areaID;
 	    	document.forms["areas"].elements["<%=Params.POPUP_WIDTH%>"].value = popupWidth;
 	    	document.forms["areas"].elements["<%=Params.POPUP_LENGTH%>"].value = popupLength;
+	    	document.forms["areas"].elements["<%=Params.AREA_DESCR%>"].value = descr;
 	    	document.forms["areas"].submit();
     	}
     	
@@ -96,7 +97,7 @@ if (areas!=null)
 									<input type="checkbox" name="<%=Params.RMV_ID%>" value="<%=id%>"/>
 								</td>
 								<td>
-									<a href="javascript:gotoHtmls('<%=id%>', '<%=popupWidth%>', '<%=popupLength%>')"><%=id%></a>
+									<a href="javascript:gotoHtmls('<%=id%>', '<%=popupWidth%>', '<%=popupLength%>', '<%=descr%>')"><%=id%></a>
 								</td>
 								<td>
 									<%=descr%>
@@ -117,6 +118,7 @@ if (areas!=null)
 						<input type="hidden" name="<%=Params.AREA_ID%>" value=""/>
 						<input type="hidden" name="<%=Params.POPUP_WIDTH%>" value=""/>
 						<input type="hidden" name="<%=Params.POPUP_LENGTH%>" value=""/>
+						<input type="hidden" name="<%=Params.AREA_DESCR%>" value=""/>
 					</fieldset>
 				</form>
 				

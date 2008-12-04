@@ -6,6 +6,9 @@ request.setCharacterEncoding("UTF-8");
 
 String screenID = (String)request.getParameter(Params.SCREEN_ID);
 String areaID   = (String)request.getParameter(Params.AREA_ID);
+String areaDescr   = (String)request.getParameter(Params.AREA_DESCR);
+if (areaDescr==null)
+	areaDescr = "";
 
 Hashtable htmls = (Hashtable)request.getAttribute(Attrs.HTMLS);
 
@@ -111,6 +114,7 @@ String strThemeAdvancedDisable = isUserSuperuser!=null && isUserSuperuser.boolea
 			<input type="hidden" name="<%=Params.ACTION%>" value="<%=Actions.EDIT_AREA%>"/>
 			<input type="hidden" name="<%=Params.SCREEN_ID%>" value="<%=screenID%>"/>
 			<input type="hidden" name="<%=Params.AREA_ID%>" value="<%=areaID%>"/>
+			<input type="hidden" name="<%=Params.AREA_DESCR%>" value="<%=areaDescr%>"/>
 		</div>
 		
 	</form>
