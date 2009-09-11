@@ -1,5 +1,10 @@
 <project name="HAT" default="compile" basedir=".">
-
+  <!--
+	OBSOLETE OBSOLETE OBSOLETE OBSOLETE OBSOLETE OBSOLETE OBSOLETE 
+	OBSOLETE OBSOLETE OBSOLETE OBSOLETE OBSOLETE OBSOLETE OBSOLETE 
+	OBSOLETE OBSOLETE OBSOLETE OBSOLETE OBSOLETE OBSOLETE OBSOLETE 
+	OBSOLETE OBSOLETE OBSOLETE OBSOLETE OBSOLETE OBSOLETE OBSOLETE 
+  -->
   <!-- set global properties for this build -->
   <property name="src" value="."/>
   <property name="classes" value="../public/WEB-INF/classes"/>
