@@ -1,0 +1,40 @@
+package eionet.helpadm.servlets;
+
+import javax.servlet.*;
+import javax.servlet.http.*;
+
+import java.util.*;
+
+import com.tee.uit.client.*;
+
+import eionet.helpadm.*;
+
+/**
+ * @author jaanus
+ *
+ * To change the template for this generated type comment go to
+ * Window&gt;Preferences&gt;Java&gt;Code Generation&gt;Code and Comments
+ */
+public class Test {
+
+	public static void main(String[] args) {
+		
+		try{
+			String serviceName = "HelpService";
+			String srvUrl = "http://localhost:8080/datadict/public/rpcrouter";
+			ServiceClientIF client =
+					ServiceClients.getServiceClient(serviceName, srvUrl);
+			client.setCredentials("test", "xxx");
+			
+			Vector params = new Vector();
+			params.add("edit");
+			params.add("abstract");
+			Object value = client.getValue("getHtmls", params);
+			System.out.println(value);
+		}
+		catch (Exception e){
+			System.out.println(e.getMessage());
+			e.printStackTrace(System.out);
+		}
+	}
+}
