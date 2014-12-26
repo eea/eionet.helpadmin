@@ -19,15 +19,6 @@
 
     <repositories>
         <repository>
-            <id>project-local</id>
-            <name>project-local repository</name>
-            <layout>default</layout>
-            <url>file:///${basedir}/lib</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
             <id>eea</id>
             <name>EEA Release Repository</name>
             <url>http://archiva.eionet.europa.eu/repository/internal</url>
