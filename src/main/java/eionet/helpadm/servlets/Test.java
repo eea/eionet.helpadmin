@@ -5,7 +5,7 @@ import javax.servlet.http.*;
 
 import java.util.*;
 
-import com.tee.uit.client.*;
+import eionet.rpcclient.*;
 
 import eionet.helpadm.*;
 

@@ -182,43 +182,33 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.codehaus.castor</groupId>
-            <artifactId>castor</artifactId>
-            <version>1.2</version>
-        </dependency>
-        <dependency>
             <groupId>eionet</groupId>
             <artifactId>eionet-dir</artifactId>
-            <version>1.0</version>
+            <version>2.5</version>
         </dependency>
         <dependency>
             <groupId>eionet</groupId>
-            <artifactId>uit-help</artifactId>
-            <version>1.1</version>
+            <artifactId>help</artifactId>
+            <version>2.0</version>
         </dependency>
         <dependency>
             <groupId>eionet</groupId>
-            <artifactId>uit-security</artifactId>
-            <version>1.1c</version>
+            <artifactId>acl</artifactId>
+            <version>2.0</version>
         </dependency>
         <dependency>
             <groupId>eionet</groupId>
-            <artifactId>uit-server</artifactId>
-            <version>1.0</version>
+            <artifactId>rpcserver</artifactId>
+            <version>2.0</version>
         </dependency>
         <dependency>
             <groupId>eionet</groupId>
-            <artifactId>uit-definition</artifactId>
-            <version>1.0</version>
+            <artifactId>definition</artifactId>
+            <version>2.0</version>
         </dependency>
         <dependency>
             <groupId>eionet</groupId>
-            <artifactId>uit-client</artifactId>
-            <version>1.0</version>
-        </dependency>
-        <dependency>
-            <groupId>xmlrpc</groupId>
-            <artifactId>xmlrpc</artifactId>
+            <artifactId>rpcclient</artifactId>
             <version>2.0</version>
         </dependency>
         <dependency>
@@ -235,7 +225,7 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>3.8.2</version>
+            <version>4.11</version>
             <scope>test</scope>
         </dependency>
     </dependencies>

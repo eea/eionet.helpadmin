@@ -1,4 +1,4 @@
-<%@page contentType="text/html;charset=UTF-8" import="java.util.*,eionet.helpadm.*,com.tee.uit.security.*"%>
+<%@page contentType="text/html;charset=UTF-8" import="java.util.*,eionet.helpadm.*,eionet.acl.*"%>
 
 <%
 

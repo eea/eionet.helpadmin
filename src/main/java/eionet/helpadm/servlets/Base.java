@@ -12,9 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.tee.uit.security.AccessControlListIF;
-import com.tee.uit.security.AccessController;
-import com.tee.uit.security.AppUser;
+import eionet.acl.AccessControlListIF;
+import eionet.acl.AccessController;
+import eionet.acl.AppUser;
 
 import eionet.helpadm.Actions;
 import eionet.helpadm.Application;
@@ -137,7 +137,7 @@ public abstract class Base extends HttpServlet {
 
         // if signon exception, remove application from session, so the user is not
         // directed to screens list again (getting the exception again and infinitely)
-        if (t.toString().indexOf("com.tee.uit.security.SignOnException") != -1 ) {
+        if (t.toString().indexOf("eionet.acl.SignOnException") != -1 ) {
             req.getSession().removeAttribute(Attrs.APP);
         }
 

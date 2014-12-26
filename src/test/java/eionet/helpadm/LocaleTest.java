@@ -1,16 +1,18 @@
 package eionet.helpadm;
 
-import junit.framework.TestCase;
+import static junit.framework.Assert.assertEquals;
+import org.junit.Test;
 
 /**
  *
- * @author Søren Roug, e-mail: <a href="mailto:soren.roug@eea.europa.eu">soren.roug@eea.europa.eu</a>
+ * @author Søren Roug
  *
  */
-public class LocaleTest extends TestCase {
+public class LocaleTest {
 
 
-    public void test_javac_utf8() {
+    @Test
+    public void javac_utf8() {
         // Verify that javac can handle "Elektra" in the Greek alphabet
         char elektra[] = {
                 '\u0397', '\u03bb', '\u03ad', '\u03ba', '\u03c4', '\u03c1', '\u03b1'
