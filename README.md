@@ -1,12 +1,12 @@
+Eionet HelpAdmin software
+=========================
 
-**********************************************************************
 This is a short installation guide for the EIONET HelpAdmin software.
-**********************************************************************
 
 HelpAdmin is small web-application that enables to administer various
 informative texts in other web-applications. These other applications
-must include uit-help.jar (see inside lib/eionet/uit-help directory)
-on their classpth and also have the HLP_SCREEN and HLP_AREA tables
+must include eionet-help.jar (see inside lib/eionet/eionet-help directory)
+on their classpath and also have the HLP_SCREEN and HLP_AREA tables
 in their database. See documents inside the doc/ directory for more.
 
 HelpAdmin accesses the remote applications via XML-RPC router that
@@ -18,7 +18,6 @@ more below).
 Below, TRUNK denotes the directory where you have downloaded HelpAdmin's
 SVN trunk into.
 
-****************************************************************************
 
 1. Create local properties file for the build.
 
@@ -37,12 +36,16 @@ HelpAdmin is built with Apache Maven.
 Assuming you have Maven installed, and its "mvn" executable on your
 path, execute the following command while in TRUNK:
 
+```sh
 mvn clean install
+```
 
 If you named your local.properties for example to otherName.properties,
 you need to pass it to the build like this:
 
+```sh
 mvn -Denv=otherName clean install
+```
 
 3. Deploy helpadmin.war to the Tomcat.
 

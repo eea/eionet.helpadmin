@@ -2,7 +2,7 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>eionet.helpadmin</groupId>
+    <groupId>eionet</groupId>
     <artifactId>helpadmin</artifactId>
     <packaging>war</packaging>
 
@@ -14,7 +14,6 @@
 
     <version>1.0-SNAPSHOT</version>
     <name>helpadmin</name>
-    <url>http://maven.apache.org</url>
 
     <!-- configuration of Maven repositories to be used -->
 
@@ -30,7 +29,7 @@
         </repository>
         <repository>
             <id>eea</id>
-            <name>EAA Release Repository</name>
+            <name>EEA Release Repository</name>
             <url>http://archiva.eionet.europa.eu/repository/internal</url>
             <snapshots>
                 <enabled>false</enabled>
@@ -262,6 +261,5 @@
             </plugin>
         </plugins>
     </reporting>
-
 
 </project>
