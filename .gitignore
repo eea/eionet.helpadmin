@@ -1,0 +1,10 @@
+/rebuild.sh
+/deploy.sh
+/local.properties
+/target
+/.project
+/.classpath
+/.settings
+/*.iml
+/*.bat
+/.idea
