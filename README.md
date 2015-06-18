@@ -15,13 +15,13 @@ are configured in helpadmin.properties which gets its values from
 the local properties file that is provided at build time (see for
 more below).
 
-Below, TRUNK denotes the directory where you have downloaded HelpAdmin's
-SVN trunk into.
+Below, ROOT denotes the directory where you have downloaded HelpAdmin's
+git repository into.
 
 
 1. Create local properties file for the build.
 
-In TRUNK, make a copy of the unittest.properties and call it
+In ROOT, make a copy of the unittest.properties and call it
 local.properties. Inside the file, make replacements appropriate
 to your environment.
 
@@ -34,7 +34,7 @@ explicitly provide the name of that properties file to the build
 
 HelpAdmin is built with Apache Maven.
 Assuming you have Maven installed, and its "mvn" executable on your
-path, execute the following command while in TRUNK:
+path, execute the following command while in ROOT:
 
 ```sh
 mvn clean install
