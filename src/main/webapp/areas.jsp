@@ -1,4 +1,4 @@
-<%@page contentType="text/html;charset=UTF-8" import="java.util.*,eionet.helpadm.*,eionet.helpadm.util.*,eionet.help.*"%>
+<%@page contentType="text/html;charset=UTF-8" import="java.util.*,org.owasp.encoder.*,eionet.helpadm.*,eionet.helpadm.util.*,eionet.help.*"%>
 
 <%
 
@@ -19,23 +19,23 @@ if (areas!=null)
     <script type="text/javascript">
 // <![CDATA[
     	function gotoHtmls(areaID, popupWidth, popupLength, descr){
-	    	document.forms["areas"].elements["<%=Params.SCREEN_ID%>"].value = "<%=screenID%>";
+	    	document.forms["areas"].elements["<%=Params.SCREEN_ID%>"].value = "<%=Encode.forHtmlAttribute(screenID)%>";
 	    	document.forms["areas"].elements["<%=Params.AREA_ID%>"].value = areaID;
 	    	document.forms["areas"].elements["<%=Params.POPUP_WIDTH%>"].value = popupWidth;
 	    	document.forms["areas"].elements["<%=Params.POPUP_LENGTH%>"].value = popupLength;
 	    	document.forms["areas"].elements["<%=Params.AREA_DESCR%>"].value = descr;
 	    	document.forms["areas"].submit();
     	}
-    	
+
     	function createNew(){
 	    	document.forms["create"].submit();
     	}
-    	
+
     	function remove(){
 	    	document.forms["areas"].elements["<%=Params.ACTION%>"].value = "<%=Actions.REMOVE_AREAS%>";
 	    	document.forms["areas"].submit();
     	}
-    	
+
     	function gotoScreens(){
 	    	document.forms["areas"].elements["<%=Params.ACTION%>"].value = "<%=Actions.LIST_SCREENS%>";
 	    	document.forms["areas"].submit();
@@ -56,19 +56,19 @@ if (areas!=null)
     </ul>
     </div>
 
-    <h1>Areas of <em><%=screenID%></em> screen</h1>					
+    <h1>Areas of <em><%=Encode.forHtmlContent(screenID)%></em> screen</h1>
 	<br/>
 	<br/>
-				<form id="areas" method="post" action="main">					
+				<form id="areas" method="post" action="main">
 				<%
-				
+
 				if (areas==null || areas.size()==0){ %>
 					<strong>No areas found!</strong><br/><br/>
 					<input type="button" class="smallbutton" value="Create new" onclick="createNew()"/><%
 				}
-				else{ %>				
+				else{ %>
 					<table width="600" cellspacing="0" cellpadding="3">
-					
+
 						<tr>
 							<td colspan="3">
 								<input type="button" class="smallbutton" value="Create new" onclick="createNew()"/>
@@ -83,51 +83,51 @@ if (areas!=null)
 							<th style="width:100" align="left">Area</th>
 							<th style="width:480" align="left">Description</th>
 						</tr>
-						
+
 						<%
 						for (int i=0; i<areas.size(); i++){
 							Hashtable area = (Hashtable)areas.get(i);
 							String id = (String)area.get(Area.ID);
 							String descr = (String)area.get(Area.DESCR);
-							String popupWidth =  (String)area.get(Area.POPUP_WIDTH);
+							String popupWidth = (String)area.get(Area.POPUP_WIDTH);
 							String popupLength = (String)area.get(Area.POPUP_LENGTH);
 							%>
-							<tr>								
+							<tr>
 								<td align="right">
-									<input type="checkbox" name="<%=Params.RMV_ID%>" value="<%=id%>"/>
+									<input type="checkbox" name="<%=Params.RMV_ID%>" value="<%=Encode.forHtmlAttribute(id)%>"/>
 								</td>
 								<td>
-									<a href="javascript:gotoHtmls('<%=id%>', '<%=popupWidth%>', '<%=popupLength%>', '<%=descr%>')"><%=id%></a>
+									<a href="javascript:gotoHtmls('<%=Encode.forHtmlAttribute(id)%>', '<%=popupWidth%>', '<%=popupLength%>', '<%=Encode.forHtmlAttribute(descr)%>')"><%=Encode.forHtmlContent(id)%></a>
 								</td>
 								<td>
-									<%=descr%>
+									<%=Encode.forHtmlContent(descr)%>
 								</td>
 							</tr>
 							<%
 						}
 						%>
 					</table>
-					
+
 					<%
 				}
-				
+
 				%>
 					<fieldset style="display:none">
 						<input type="hidden" name="<%=Params.ACTION%>" value="<%=Actions.LIST_HTMLS%>"/>
-						<input type="hidden" name="<%=Params.SCREEN_ID%>" value="<%=screenID%>"/>
+						<input type="hidden" name="<%=Params.SCREEN_ID%>" value="<%=Encode.forHtmlAttribute(screenID)%>"/>
 						<input type="hidden" name="<%=Params.AREA_ID%>" value=""/>
 						<input type="hidden" name="<%=Params.POPUP_WIDTH%>" value=""/>
 						<input type="hidden" name="<%=Params.POPUP_LENGTH%>" value=""/>
 						<input type="hidden" name="<%=Params.AREA_DESCR%>" value=""/>
 					</fieldset>
 				</form>
-				
+
 				<form id="create" action="<%=JSPs.AREA%>" method="post">
 					<fieldset style="display:none">
-						<input type="hidden" name="<%=Params.SCREEN_ID%>" value="<%=screenID%>"/>
+						<input type="hidden" name="<%=Params.SCREEN_ID%>" value="<%=Encode.forHtmlAttribute(screenID)%>"/>
 					</fieldset>
 				</form>
-				
+
 				</div> <!-- workarea -->
 				</div> <!-- container -->
 <%@ include file="footer.jsp" %>

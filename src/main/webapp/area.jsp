@@ -1,4 +1,4 @@
-<%@page contentType="text/html;charset=UTF-8" import="java.util.*,eionet.helpadm.*,eionet.help.*"%>
+<%@page contentType="text/html;charset=UTF-8" import="java.util.*,org.owasp.encoder.*,eionet.helpadm.*,eionet.help.*"%>
 
 <%
 
@@ -29,12 +29,12 @@ if (screenID==null){
 
 					<form id="area" method="post" action="main">
 						<table width="600" cellspacing="0" cellpadding="3">
-						
+
 							<tr>
 								<td>&nbsp;</td>
 								<td>Create new area</td>
 							</tr>
-							<tr height="10"><td colspan="2"></td></tr>						
+							<tr height="10"><td colspan="2"></td></tr>
 							<tr>
 								<td><strong>ID:</strong></td>
 								<td><input type="text" size="20" name="<%=Params.AREA_ID%>"/></td>
@@ -49,11 +49,11 @@ if (screenID==null){
 								<td>&nbsp;</td>
 								<td><input type="submit" value="Create"/></td>
 							</tr>
-							
+
 						</table>
 						<fieldset style="display:none">
 							<input type="hidden" name="<%=Params.ACTION%>" value="<%=Actions.CREATE_AREA%>"/>
-							<input type="hidden" name="<%=Params.SCREEN_ID%>" value="<%=screenID%>"/>
+							<input type="hidden" name="<%=Params.SCREEN_ID%>" value="<%=Encode.forHtmlAttribute(screenID)%>"/>
 						</fieldset>
 					</form>
 				</div> <!-- workarea -->

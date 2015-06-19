@@ -1,4 +1,4 @@
-<%@page contentType="text/html;charset=UTF-8" import="java.util.*,eionet.helpadm.*,eionet.help.*,eionet.helpadm.util.*"%>
+<%@page contentType="text/html;charset=UTF-8" import="java.util.*,org.owasp.encoder.*,eionet.helpadm.*,eionet.help.*,eionet.helpadm.util.*"%>
 
 <%
 
@@ -69,28 +69,25 @@ String strThemeAdvancedDisable = isUserSuperuser!=null && isUserSuperuser.boolea
     </ul>
     </div>
 
-    <h1>Properties of <em><%=areaID%></em> area</h1>
+    <h1>Properties of <em><%=Encode.forHtmlContent(areaID)%></em> area</h1>
 
 	<form id="htmls" method="post" action="main">
-	
+
 		<table width="100%" cellspacing="0" cellpadding="0">
 			<tr>
 				<td><label for="fld_descr" class="question">Title</label></td>
-				<td><input type="text" size="60" id="fld_descr" name="<%=Params.AREA_DESCR%>" value="<%=areaDescr%>"/></td>
+				<td><input type="text" size="60" id="fld_descr" name="<%=Params.AREA_DESCR%>" value="<%=Encode.forHtmlAttribute(areaDescr)%>"/></td>
 			</tr>
 			<tr>
 				<td colspan="2"><label class="question">HTML text</label></td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<%
-					String doubleEscapedHtmlText = eionet.helpadm.util.Util.escapeEscapedHTML(htmlText);
-					%>
-					<textarea id="helpTextArea1" style="width:100%" cols="80" rows="20" name="<%=Params.HTML_TEXT%>"><%=doubleEscapedHtmlText%></textarea>
+					<textarea id="helpTextArea1" style="width:100%" cols="80" rows="20" name="<%=Params.HTML_TEXT%>"><%=Encode.forHtmlContent(htmlText)%></textarea>
 				</td>
 			</tr>
 		</table>
-		
+
 		<table width="650" cellspacing="0" cellpadding="0">
 		  <col style="width: 15%"/>
 		  <col style="width: 60%"/>
@@ -115,13 +112,13 @@ String strThemeAdvancedDisable = isUserSuperuser!=null && isUserSuperuser.boolea
 				</td>
 			</tr>
 		</table>
-		
+
 		<div style="display:none">
 			<input type="hidden" name="<%=Params.ACTION%>" value="<%=Actions.EDIT_AREA%>"/>
-			<input type="hidden" name="<%=Params.SCREEN_ID%>" value="<%=screenID%>"/>
-			<input type="hidden" name="<%=Params.AREA_ID%>" value="<%=areaID%>"/>
+			<input type="hidden" name="<%=Params.SCREEN_ID%>" value="<%=Encode.forHtmlAttribute(screenID)%>"/>
+			<input type="hidden" name="<%=Params.AREA_ID%>" value="<%=Encode.forHtmlAttribute(areaID)%>"/>
 		</div>
-		
+
 	</form>
 </div> <!-- workarea -->
 </div> <!-- container -->

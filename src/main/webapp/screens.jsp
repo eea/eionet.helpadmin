@@ -1,4 +1,4 @@
-<%@page contentType="text/html;charset=UTF-8" import="java.util.*,eionet.helpadm.*,eionet.helpadm.util.*,eionet.help.*"%>
+<%@page contentType="text/html;charset=UTF-8" import="java.util.*,org.owasp.encoder.*, eionet.helpadm.*,eionet.helpadm.util.*,eionet.help.*"%>
 
 <%
 
@@ -22,16 +22,16 @@ if (screens!=null)
 	    	document.forms["screens"].elements["<%=Params.SCREEN_ID%>"].value = screenID;
 	    	document.forms["screens"].submit();
     	}
-    	
+
     	function createNew(){
 	    	document.location.assign('<%=JSPs.SCREEN%>');
     	}
-    	
+
     	function reload(){
 	    	document.forms["screens"].elements["<%=Params.ACTION%>"].value = "<%=Actions.APPRELOAD%>";
 	    	document.forms["screens"].submit();
     	}
-    	
+
     	function remove(){
 	    	document.forms["screens"].elements["<%=Params.ACTION%>"].value = "<%=Actions.REMOVE_SCREENS%>";
 	    	document.forms["screens"].submit();
@@ -56,14 +56,14 @@ if (screens!=null)
 	<br/>
 				<form id="screens" method="post" action="main">
 				<%
-				
+
 				if (screens==null || screens.size()==0){ %>
 					<b>No screens found!</b><br/><br/>
 					<input type="button" class="smallbutton" value="Create new" onclick="createNew()"/><%
 				}
 				else{ %>
 					<table width="600" cellspacing="0" cellpadding="3">
-					
+
 						<tr>
 							<td colspan="3">
 								<input type="button" class="smallbutton" value="Create new" onclick="createNew()"/>
@@ -79,7 +79,7 @@ if (screens!=null)
 							<th style="width:100" align="left">Screen</th>
 							<th style="width:480" align="left">Description</th>
 						</tr>
-						
+
 						<%
 						for (int i=0; i<screens.size(); i++){
 							Hashtable screen = (Hashtable)screens.get(i);
@@ -88,24 +88,24 @@ if (screens!=null)
 							%>
 							<tr>
 								<td align="right">
-									<input type="checkbox" name="<%=Params.RMV_ID%>" value="<%=id%>"/>
+									<input type="checkbox" name="<%=Params.RMV_ID%>" value="<%=Encode.forHtmlAttribute(id)%>"/>
 								</td>
 								<td>
-									<a href="javascript:gotoScreen('<%=id%>')"><%=id%></a>
+									<a href="javascript:gotoScreen('<%=Encode.forHtmlAttribute(id)%>')"><%=Encode.forHtmlContent(id)%></a>
 								</td>
 								<td>
-									<%=descr%>
+									<%=Encode.forHtmlContent(descr)%>
 								</td>
 							</tr>
 							<%
 						}
 						%>
-						
+
 					</table>
-					
+
 					<%
 				}
-				
+
 				%>
 					<fieldset style="display:none">
 						<input type="hidden" name="<%=Params.ACTION%>" value="<%=Actions.LIST_AREAS%>"/>
