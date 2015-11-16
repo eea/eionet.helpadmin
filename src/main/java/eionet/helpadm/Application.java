@@ -13,7 +13,7 @@ import eionet.rpcclient.ServiceClients;
 
 import eionet.helpadm.util.Util;
 
-public class Application implements java.io.Serializable{
+public class Application implements java.io.Serializable {
 
     public static final String RPC_SERVICE_NAME = "HelpService";
 
@@ -29,7 +29,7 @@ public class Application implements java.io.Serializable{
     /**
      *
      */
-    public Application(String name, String url){
+    public Application(String name, String url) {
         this.name = name;
         this.url  = url;
         extractHost();
@@ -38,21 +38,21 @@ public class Application implements java.io.Serializable{
     /**
      *
      */
-    public String getHost(){
+    public String getHost() {
         return host;
     }
 
     /**
      *
      */
-    public String getName(){
+    public String getName() {
         return name;
     }
 
     /**
      *
      */
-    public String getUrl(){
+    public String getUrl() {
         return url;
     }
 
@@ -82,7 +82,7 @@ public class Application implements java.io.Serializable{
      */
     public void reload() throws Exception {
 
-        if (client==null) {
+        if (client == null) {
             loadClient();
         }
         Vector params = new Vector();
@@ -92,9 +92,9 @@ public class Application implements java.io.Serializable{
     /**
      *
      */
-    private void listScreens(HttpServletRequest req) throws Exception{
+    private void listScreens(HttpServletRequest req) throws Exception {
 
-        if (client==null) {
+        if (client == null) {
             loadClient();
         }
 
@@ -106,14 +106,14 @@ public class Application implements java.io.Serializable{
     /**
      *
      */
-    private void listAreas(HttpServletRequest req) throws Exception{
+    private void listAreas(HttpServletRequest req) throws Exception {
 
         String screenID = req.getParameter(Params.SCREEN_ID);
-        if (screenID==null) {
+        if (screenID == null) {
             throwMissingParam(Params.SCREEN_ID);
         }
 
-        if (client==null) {
+        if (client == null) {
             loadClient();
         }
 
@@ -125,19 +125,19 @@ public class Application implements java.io.Serializable{
     /**
      *
      */
-    private void listHtmls(HttpServletRequest req) throws Exception{
+    private void listHtmls(HttpServletRequest req) throws Exception {
 
         String screenID = req.getParameter(Params.SCREEN_ID);
-        if (screenID==null) {
+        if (screenID == null) {
             throwMissingParam(Params.SCREEN_ID);
         }
 
         String areaID = req.getParameter(Params.AREA_ID);
-        if (areaID==null) {
+        if (areaID == null) {
             throwMissingParam(Params.AREA_ID);
         }
 
-        if (client==null) {
+        if (client == null) {
             loadClient();
         }
 
@@ -151,8 +151,8 @@ public class Application implements java.io.Serializable{
     /**
      *
      */
-    private void testMe(HttpServletRequest req) throws Exception{
-        if (client==null) {
+    private void testMe(HttpServletRequest req) throws Exception {
+        if (client == null) {
             loadClient();
         }
 
@@ -167,18 +167,18 @@ public class Application implements java.io.Serializable{
     /**
      *
      */
-    private void createScreen(HttpServletRequest req) throws Exception{
+    private void createScreen(HttpServletRequest req) throws Exception {
 
         String id = req.getParameter(Params.SCREEN_ID);
         if (Util.nullString(id)) {
             throwMissingParam(Params.SCREEN_ID);
         }
         String descr = req.getParameter(Params.SCREEN_DESCR);
-        if (descr==null) {
+        if (descr == null) {
             descr = "";
         }
 
-        if (client==null) {
+        if (client == null) {
             loadClient();
         }
 
@@ -191,7 +191,7 @@ public class Application implements java.io.Serializable{
     /**
      *
      */
-    private void createArea(HttpServletRequest req) throws Exception{
+    private void createArea(HttpServletRequest req) throws Exception {
 
         String screenID = req.getParameter(Params.SCREEN_ID);
         if (Util.nullString(screenID)) {
@@ -202,11 +202,11 @@ public class Application implements java.io.Serializable{
             throwMissingParam(Params.AREA_ID);
         }
         String descr = req.getParameter(Params.AREA_DESCR);
-        if (descr==null) {
+        if (descr == null) {
             descr = "";
         }
 
-        if (client==null) {
+        if (client == null) {
             loadClient();
         }
 
@@ -220,14 +220,14 @@ public class Application implements java.io.Serializable{
     /**
      *
      */
-    private void removeScreens(HttpServletRequest req) throws Exception{
+    private void removeScreens(HttpServletRequest req) throws Exception {
 
         String[] _rmvids = req.getParameterValues(Params.RMV_ID);
-        if (_rmvids==null || _rmvids.length==0) {
+        if (_rmvids == null || _rmvids.length == 0) {
             throwMissingParam(Params.RMV_ID);
         }
 
-        if (client==null) {
+        if (client == null) {
             loadClient();
         }
 
@@ -244,7 +244,7 @@ public class Application implements java.io.Serializable{
     /**
      *
      */
-    private void removeAreas(HttpServletRequest req) throws Exception{
+    private void removeAreas(HttpServletRequest req) throws Exception {
 
         String screenID = req.getParameter(Params.SCREEN_ID);
         if (Util.nullString(screenID)) {
@@ -252,11 +252,11 @@ public class Application implements java.io.Serializable{
         }
 
         String[] _rmvids = req.getParameterValues(Params.RMV_ID);
-        if (_rmvids==null || _rmvids.length==0) {
+        if (_rmvids == null || _rmvids.length == 0) {
             throwMissingParam(Params.RMV_ID);
         }
 
-        if (client==null) {
+        if (client == null) {
             loadClient();
         }
 
@@ -274,7 +274,7 @@ public class Application implements java.io.Serializable{
     /**
      *
      */
-    private void editHtml(HttpServletRequest req) throws Exception{
+    private void editHtml(HttpServletRequest req) throws Exception {
 
         String screenID = req.getParameter(Params.SCREEN_ID);
         if (Util.nullString(screenID)) {
@@ -285,11 +285,11 @@ public class Application implements java.io.Serializable{
             throwMissingParam(Params.AREA_ID);
         }
         String htmlText = req.getParameter(Params.HTML_TEXT);
-        if (htmlText==null) {
+        if (htmlText == null) {
             htmlText = "";
         }
 
-        if (client==null) {
+        if (client == null) {
             loadClient();
         }
 
@@ -303,7 +303,7 @@ public class Application implements java.io.Serializable{
     /**
      *
      */
-    private void editArea(HttpServletRequest req) throws Exception{
+    private void editArea(HttpServletRequest req) throws Exception {
 
         String screenID = req.getParameter(Params.SCREEN_ID);
         if (Util.nullString(screenID)) {
@@ -316,26 +316,26 @@ public class Application implements java.io.Serializable{
         }
 
         String htmlText = req.getParameter(Params.HTML_TEXT);
-        if (htmlText==null) {
+        if (htmlText == null) {
             htmlText = "";
         }
 
         String popupWidth = req.getParameter(Params.POPUP_WIDTH);
-        if (popupWidth==null) {
+        if (popupWidth == null) {
             popupWidth = "";
         }
 
         String popupLength = req.getParameter(Params.POPUP_LENGTH);
-        if (popupLength==null) {
+        if (popupLength == null) {
             popupLength = "";
         }
 
         String areaDescr = req.getParameter(Params.AREA_DESCR);
-        if (areaDescr==null) {
+        if (areaDescr == null) {
             areaDescr = "";
         }
 
-        if (client==null) {
+        if (client == null) {
             loadClient();
         }
 
@@ -352,9 +352,9 @@ public class Application implements java.io.Serializable{
     /**
      *
      */
-    public void doTheData(HttpServletRequest req, String action) throws Exception{
+    public void doTheData(HttpServletRequest req, String action) throws Exception {
 
-        if (client==null) {
+        if (client == null) {
             loadClient();
         }
 
@@ -384,12 +384,12 @@ public class Application implements java.io.Serializable{
     /**
      *
      */
-    private void extractHost(){
+    private void extractHost() {
         try{
             URL _url = new URL(url);
             host = _url.getHost();
         }
-        catch (MalformedURLException e){
+        catch (MalformedURLException e) {
             host = "Malformed url: " + url;
         }
     }
@@ -397,7 +397,7 @@ public class Application implements java.io.Serializable{
     /**
      *
      */
-    private void throwMissingParam(String paramName) throws Exception{
+    private void throwMissingParam(String paramName) throws Exception {
         throw new Exception("Paramater " + paramName + " is missing!");
     }
 
@@ -405,13 +405,13 @@ public class Application implements java.io.Serializable{
      *
      * @return
      */
-    public Boolean isUserSuperuser(){
+    public Boolean isUserSuperuser() {
 
-        if (usr!=null){
+        if (usr != null) {
             String superusers = Props.getProperty(Props.SUPERUSERS);
-            if (!Util.nullString(superusers)){
+            if (!Util.nullString(superusers)) {
                 StringTokenizer st = new StringTokenizer(superusers, ",");
-                while (st.hasMoreTokens()){
+                while (st.hasMoreTokens()) {
                     if (st.nextToken().trim().equals(usr)) {
                         return new Boolean(true);
                     }
@@ -429,10 +429,10 @@ public class Application implements java.io.Serializable{
      * @param session
      * @return
      */
-    public static Boolean isUserSuperuser(HttpSession session){
+    public static Boolean isUserSuperuser(HttpSession session) {
 
         Application currentApp = (Application)session.getAttribute(Attrs.APP);
-        if (currentApp!=null) {
+        if (currentApp != null) {
             return currentApp.isUserSuperuser();
         } else {
             return null;

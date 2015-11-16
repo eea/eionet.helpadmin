@@ -37,7 +37,7 @@ public abstract class Base extends HttpServlet {
         appLogout(session);
 
         Hashtable apps = (Hashtable)session.getAttribute(Attrs.APPS);
-        if (apps==null) {
+        if (apps == null) {
             throw new Exception("No applications in session, session might be expired!");
         }
 
@@ -47,12 +47,11 @@ public abstract class Base extends HttpServlet {
         }
 
         Application app = (Application)apps.get(appName);
-        if (app!=null){
-            try{
+        if (app != null) {
+            try {
                 app.login(req.getParameter(Params.APP_USR),
                         req.getParameter(Params.APP_PSW));
-            }
-            catch (Exception e){
+            } catch (Exception e) {
                 throw new Exception("Application login error: " + e.toString());
             }
 
@@ -65,7 +64,7 @@ public abstract class Base extends HttpServlet {
     /**
      * removes the application under Attrs.APP in session
      */
-    public void appLogout(HttpSession session){
+    public void appLogout(HttpSession session) {
         session.removeAttribute(Attrs.APP);
     }
 
@@ -75,7 +74,7 @@ public abstract class Base extends HttpServlet {
     public void appReload(HttpServletRequest req) throws Exception{
 
         Application app = (Application)req.getSession().getAttribute(Attrs.APP);
-        if (app==null) {
+        if (app == null) {
             throw new Exception("Application is missing from session!");
         }
 
@@ -111,10 +110,10 @@ public abstract class Base extends HttpServlet {
     /**
      * Checks if the given username is allowed to work with Help Admin Tool
      */
-    protected boolean allowed(AppUser user){
+    protected boolean allowed(AppUser user) {
 
         try {
-            if (acls==null) {
+            if (acls == null) {
                 acls = AccessController.getAcls();
             }
 
@@ -123,8 +122,7 @@ public abstract class Base extends HttpServlet {
                 throw new Exception("Root acl was not found");
             }
             return hlpadmAcl.checkPermission(user.getUserName(), "v");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return false;
         }
     }
@@ -166,13 +164,12 @@ public abstract class Base extends HttpServlet {
                 append("<html><script type=\"text/javascript\">window.opener.location = '").
                 append(redirUrl).append("'; ").append("window.close()</script></html>");
 
-        try{
+        try {
             res.setContentType("text/html");
             PrintWriter out = res.getWriter();
             out.print(buf.toString());
             out.close();
-        }
-        catch (IOException ioe){
+        } catch (IOException ioe) {
             System.out.println("closeAppLogin() failed: " + ioe.toString());
         }
     }

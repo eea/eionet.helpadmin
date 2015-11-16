@@ -72,7 +72,7 @@ public class Main extends Base {
 
         HttpSession session = req.getSession();
         Application app = (Application)session.getAttribute(Attrs.APP);
-        if (app!=null) {
+        if (app != null) {
             app.doTheData(req, action);
         } else {
             throw new Exception("No application in session, session might be expired!");

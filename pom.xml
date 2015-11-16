@@ -8,11 +8,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <env>local</env>
-	      <java.version>1.6</java.version>
+        <java.version>1.6</java.version>
     </properties>
 
-    <version>1.1-SNAPSHOT</version>
+    <version>1.2-SNAPSHOT</version>
     <name>helpadmin</name>
 
     <!-- configuration of Maven repositories to be used -->
@@ -52,7 +51,6 @@
     <build>
         <plugins>
             <!-- maven-compiler-plugin -->
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -90,73 +88,28 @@
                 </configuration>
             </plugin>
 
-            <!-- maven-antrun-plugin -->
-            <!-- copy ${env}.properties to target/classes/helpadmin.properties -->
-
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.7</version>
-                <executions>
-                    <execution>
-                        <id>copy-and-rename-local-properties</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>run</goal>
-                        </goals>
-                        <configuration>
-                            <target name="Copy and rename local properties">
-                                <copy file="${basedir}/${env}.properties" tofile="${basedir}/target/classes/helpadmin.properties" />
-                            </target>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin>
-
             <!-- maven-war-plugin -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.1.1</version>
                 <configuration>
-                    <filters>
-                        <filter>${basedir}/${env}.properties</filter>
-                    </filters>
                     <webResources>
-                    <!--
-                        <resource>
-                            <directory>${basedir}/src/main/webapp/META-INF</directory>
-                            <filtering>true</filtering>
-                            <targetPath>META-INF</targetPath>
-                            <includes>
-                                <include>context.xml</include>
-                            </includes>
-                        </resource>
-                    -->
                         <resource>
                             <directory>${basedir}/src/main/webapp/WEB-INF</directory>
-                            <filtering>true</filtering>
+                            <filtering>false</filtering>
                             <targetPath>WEB-INF</targetPath>
                             <includes>
                                 <include>web.xml</include>
                             </includes>
                         </resource>
-                        <!-- <resource> <directory>${basedir}/src/main/webapp/pages/common</directory>
-                            <filtering>true</filtering> <targetPath>pages/common</targetPath> <includes>
-                            <include>dropdownmenus.txt</include> </includes> </resource> -->
                     </webResources>
                 </configuration>
             </plugin>
         </plugins>
 
-        <!-- filters for src/main/resources and src/test/resources -->
-
-        <filters>
-            <filter>${env}.properties</filter>
-        </filters>
-
         <!-- resources for the main code -->
-
+<!--
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
@@ -166,8 +119,9 @@
                 </includes>
             </resource>
         </resources>
-
+-->
         <!-- resources for the main code -->
+<!--
         <testResources>
             <testResource>
                 <directory>src/test/resources</directory>
@@ -177,6 +131,7 @@
                 </includes>
             </testResource>
         </testResources>
+-->
 
         <!-- name of the bundled project when it is finally built -->
         <finalName>helpadmin</finalName>
@@ -264,4 +219,113 @@
         </plugins>
     </reporting>
 
+    <profiles>
+        <profile>
+          <id>docker</id>
+          <properties>
+            <tomcat.port>4480</tomcat.port>
+          </properties>
+          <build>
+            <plugins>
+              <plugin>
+                <!-- The Docker Maven plugin is used to create docker image with the fat jar -->
+                <groupId>org.jolokia</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.13.4</version>
+                <configuration>
+                  <verbose>true</verbose>
+                  <logDate>default</logDate>
+                  <autoPull>true</autoPull>
+                  <images>
+                    <image>
+                      <alias>service</alias>
+                      <name>dockerrepo.eionet.europa.eu:5000/${project.artifactId}</name>
+                      <build>
+                        <from>tomcat:7-jre7</from>
+                        <maintainer>Søren Roug &lt;soren.roug@eea.europa.eu&gt;</maintainer>
+                        <tags>
+                          <tag>latest</tag>
+                          <tag>${project.version}</tag>
+                        </tags>
+                        <!-- Assembly descriptor holds the reference to the created artifact-->
+                        <assembly>
+                          <descriptor>assembly.xml</descriptor>
+                        </assembly>
+                        <runCmds>
+                          <run>[ -d /var/local/helpadmin ] || mkdir /var/local/helpadmin</run>
+                          <run>rm -rf /usr/local/tomcat/webapps/*</run>
+                          <run>mv /maven/helpadmin.war /usr/local/tomcat/webapps/ROOT.war</run>
+                          <run>[ -f /var/local/helpadmin/helpadmin.properties ] || mv /maven/helpadmin.properties /var/local/helpadmin</run>
+                        </runCmds>
+                        <optimise>false</optimise>
+
+                        <!-- Expose ports -->
+                        <ports>
+                          <port>8080</port>
+                          <port>8009</port>
+                        </ports>
+                        <!-- Default command for the build image -->
+                        <!--<cmd>catalina.sh run</cmd> -->
+                      </build>
+
+                      <run>
+                        <env>
+                          <HELPADMIN_CONF>/var/local/helpadmin/helpadmin.properties</HELPADMIN_CONF>
+                          <CATALINA_OPTS>-Djava.security.egd=file:/dev/./urandom</CATALINA_OPTS>
+                        </env>
+                        <!-- Assign dynamically mapped ports to maven variables (which can be reused in integration tests) -->
+                        <ports>
+                          <port>tomcat.port:8080</port>
+                        </ports>
+                        <wait>
+                          <log>Deployment of web application archive /usr/local/tomcat/webapps/ROOT.war has finished in</log>
+                          <!-- Check for this URL to return a 200 return code .... -->
+                          <!--<url>http://${docker.host.address}:${tomcat.port}/</url>-->
+                          <!-- ... but at max 60 seconds -->
+                          <time>60000</time>
+                        </wait>
+                        <log>
+                          <prefix>TC</prefix>
+                          <color>red</color>
+                        </log>
+                      </run>
+                    </image>
+                  </images>
+                </configuration>
+
+                <!-- Hooking into the lifecycle -->
+                <executions>
+                  <execution>
+                    <id>start</id>
+                    <phase>pre-integration-test</phase>
+                    <goals>
+                      <goal>build</goal>
+                      <goal>start</goal>
+                    </goals>
+                  </execution>
+                  <execution>
+                    <id>stop</id>
+                    <phase>post-integration-test</phase>
+                    <goals>
+                      <goal>stop</goal>
+                    </goals>
+                  </execution>
+                </executions>
+              </plugin>
+
+              <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                  <systemPropertyVariables>
+                    <app.url>http://${docker.host.address}:${tomcat.port}/</app.url>
+                  </systemPropertyVariables>
+                </configuration>
+              </plugin>
+
+            </plugins>
+          </build>
+        </profile>
+    </profiles>
 </project>

@@ -23,11 +23,11 @@ public class Util {
         }
 
         StringBuffer buf = new StringBuffer();
-        for (int i=0; i<s.length(); i++){
+        for (int i = 0; i < s.length(); i++){
             char c = s.charAt(i);
-            if (c=='&'){
+            if (c == '&'){
                 int index = s.indexOf(';', i);
-                if (index!=-1){
+                if (index != -1){
                     String subs = s.substring(i, index+1);
                     if (Util.isNumericHTMLEscapeCode(subs) || Util.isXHTMLEntity(subs)){
                         buf.append("&amp;").append(subs.substring(1));
@@ -46,10 +46,10 @@ public class Util {
     /*
      *
      */
-    //	private static String htmlEscapeFirstAmpersand(String s){
+    // private static String htmlEscapeFirstAmpersand(String s){
     //
-    //		StringBuffer buf = new StringBuffer("&amp;");
-    //	}
+    //  StringBuffer buf = new StringBuffer("&amp;");
+    // }
 
     /*
      *
