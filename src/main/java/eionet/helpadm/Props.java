@@ -5,7 +5,6 @@ import java.util.Hashtable;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.IOException;
-//import java.util.*;
 
 public class Props {
 
@@ -17,54 +16,52 @@ public class Props {
     public static final String DBG = "dbg";
 
     private static Properties props = null;
-    private static Hashtable defaults = null;
 
     /**
-     * get String property
-     * @param name
+     * Get String property. First tries system properties.
+     * Then the property loaded from properties file.
+     * @param name - Name of the property.
      * @return
      */
     public static synchronized String getProperty(String name) {
-
-        if (props == null)
+        if (props == null) {
             init();
+        }
 
         String prop = null;
+        prop = System.getProperty(name);
+        if (prop != null) {
+            return prop;
+        }
         if (props != null) {
             prop = props.getProperty(name);
         }
-
         if (prop == null) {
-            prop = (String)defaults.get(name);
-            if (prop != null)
-                System.out.println("Property value for key " + name + " not found. Using default.");
+            System.out.println("Default Property value for key " + name + " not found.");
         }
         return prop;
     }
 
+
     /**
      * Get int property. Throws an exception if Integer.parseInt() failed.
-     * @param name
+     * @param name - Name of the property.
      * @return
      * @throws Exception
      */
     public static synchronized int getIntProperty(String name) throws Exception {
-        String sProp = Props.getProperty(name);
+        String sProp = getProperty(name);
         try {
             return Integer.parseInt(sProp);
         } catch (NumberFormatException nfe) {
-            String dflt = (String)defaults.get(name);
-            if (dflt != null) {
-                System.out.println("Invalid property value for key " + name + ". Using default.");
-                return Integer.parseInt(dflt);
-            } else {
-                throw new Exception("Invalid property value for key " + name);
-            }
+            throw new Exception("Bad integer conversion of " + sProp);
         }
     }
 
     /**
-     * Initializes the properties from file. Called if the props variable is null.
+     * Initializes the properties from file. These are fallback values.
+     *
+     * Called if the props variable is null.
      */
     private static synchronized void init() {
         props = new Properties();
@@ -95,14 +92,5 @@ public class Props {
             //throw new Exception("Properties file is not readable");
             System.out.println("Properties file is not readable");
         }
-        setDefaults();
-    }
-
-    /**
-     * sets the default properties
-     *
-     */
-    private static synchronized void setDefaults() {
-        defaults = new Hashtable();
     }
 }

@@ -1,14 +1,19 @@
 web:
   restart: always
-  image: dockerrepo.eionet.europa.eu:5000/helpadmin:latest
+  image: dockerrepo.eionet.europa.eu:5000/eionet/helpadmin:latest
   ports:
     - "4480:8080"
     - "4409:8009"
   volumes:
-    - /var/local/helpadmin:/var/local/helpadmin:ro
     - /etc/localtime:/etc/localtime:ro # Share timezone data with host
   environment:
-    - HELPADMIN_CONF=/var/local/helpadmin/helpadmin.properties
-    - CATALINA_OPTS=-Djava.security.egd=file:/dev/./urandom
+    CATALINA_OPTS: |-
+      -Djava.security.egd=file:/dev/./urandom
+      -Dapplications=DataDict,ETCDD,ROD,XX
+      -DDataDict.router.url=http://dd.eionet.europa.eu/rpcrouter
+      -DETCDD.router.url=http://etcdd.eionet.europa.eu/rpcrouter
+      -DROD.router.url=http://rod.eionet.europa.eu/rpcrouter
+      -DXX.router.url=http://xx.eionet.europa.eu/rpcrouter
+      -Dsuperusers=roug,peifer,prospchr
   hostname: helpadmin
   mem_limit: 300M

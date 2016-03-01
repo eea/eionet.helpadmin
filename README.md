@@ -29,10 +29,10 @@ path, execute the following command while in ROOT:
 mvn clean install
 ```
 
-2. Define the environment variable HELPADMIN_CONF for Tomcat.
+2. Configure the application.
 
 When the application starts up then it will look in the environment
-variable HELPADMIN_CONR for a path name to a properties file. 
+variable HELPADMIN_CONF for a path name to a properties file. 
 
 ```sh
 export HELPADMIN_CONF=/var/local/helpadmin/helpadmin.properties
@@ -40,6 +40,8 @@ export HELPADMIN_CONF=/var/local/helpadmin/helpadmin.properties
 
 In Linux you add the line to /etc/sysconfig/tomcat without the export key word.
 If it is not specified, then it will load a default properties file in the class path.
+Alternatively, you can specify the configuration as system properties in CATALINA_OPTS.
+The same names as in the helpadmin.properties file. These will take precedence.
 
 3. Deploy helpadmin.war to the Tomcat.
 
